@@ -16,7 +16,7 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorGKETestApp', '.']
+  args: ['build', '-t', 'gcr.io/firstgke-418008/gke-image-repository/blazorGKETestApp', '.']
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorGKETestApp']
+  args: ['push', 'gcr.io/firstgke-418008/gke-image-repository/blazorGKETestApp']
