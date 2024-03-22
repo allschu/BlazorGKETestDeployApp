@@ -16,7 +16,7 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t',
+    args: ['build', '-f', '/BlazorGKETestApp/BlazorGKETestApp', '-t',
            'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository',
            '.']
   # Docker Push
