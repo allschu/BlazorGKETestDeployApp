@@ -1,0 +1,119 @@
+# Delivery pipeline config
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+ name:
+ annotations:
+ labels:
+description:
+suspended:
+serialPipeline:
+ stages:
+ - targetId:
+   profiles: []
+# Deployment strategies
+# One of:
+#   standard:
+#   canary:
+# See the strategy section in this document for details.
+   strategy:
+     standard:
+       verify:
+       predeploy:
+         actions: []
+       postdeploy:
+         actions: []
+   deployParameters:
+   - values:
+     matchTargetLabels:
+ - targetId:
+   profiles: []
+   strategy:
+   deployParameters:
+---
+
+# Target config
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name:
+ annotations:
+ labels:
+description:
+multiTarget:
+ targetIds: []
+deployParameters:
+requireApproval:
+#
+# Runtimes
+# one of the following runtimes:
+gke:
+ cluster:
+ internalIp:
+#
+# or:
+anthosCluster:
+ membership:
+#
+# or:
+run:
+ location:
+#
+# or:
+customTarget:
+  customTargetType:
+#
+# (End runtimes. See documentation in this article for more details.)
+#
+executionConfigs:
+- usages:
+  - [RENDER | PREDEPLOY | DEPLOY | VERIFY | POSTDEPLOY]
+  workerPool:
+  serviceAccount:
+  artifactStorage:
+  executionTimeout:
+---
+
+# Custom target type config
+apiVersion: deploy.cloud.google.com/v1
+kind: CustomTargetType
+metadata:
+  name:
+  annotations:
+  labels:
+description:
+customActions:
+  renderAction:
+  deployAction:
+  includeSkaffoldModules:
+    - configs:
+    # either:
+    googleCloudStorage:
+      source:
+      path:
+    # or:
+    git:
+      repo:
+      path:
+      ref:
+---
+
+# Automation config
+apiVersion: deploy.cloud.google.com/v1
+kind: Automation
+metadata:
+  name:
+  labels:
+  annotations:
+description:
+suspended:
+serviceAccount:
+selector:
+- target:
+    id:
+    # or
+    labels:
+rules:
+- [RULE_TYPE]:
+  name:
+  [RULE-SPECIFIC_CONFIG]
