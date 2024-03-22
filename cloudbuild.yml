@@ -14,9 +14,13 @@
 
 # [START cloudbuild_basic_config]
 steps:
-# Build the container image
-- name: 'us-central1-docker.pkg.dev/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository', '.']
-# Push the container image to Container Registry
-- name: 'us-central1-docker.pkg.dev/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository']
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t',
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository',
+           '.']
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository']
+# [END cloudbuild_basic_config]
