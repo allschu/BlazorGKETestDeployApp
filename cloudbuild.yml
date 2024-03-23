@@ -17,10 +17,10 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'BlazorGKETestApp/BlazorGKETestApp/Dockerfile', '-t',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository',
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/BlazorGKE',
            '.']
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository']
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/BlazorGKE']
 # [END cloudbuild_basic_config]
