@@ -25,4 +25,4 @@ steps:
            'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke']
   # deploy container image to GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
-    args: ['run', '--filename=deployment.yml', '--location=us-central1', '--cluster= tryout-gke']
+    args: ['run', '--filename=deployment.yml', '--location=us-central1', '--cluster=tryout-gke']
