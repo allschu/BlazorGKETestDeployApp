@@ -17,10 +17,12 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'BlazorGKETestApp/BlazorGKETestApp/Dockerfile', '-t',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository',
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke',
            '.']
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository']
-# [END cloudbuild_basic_config]
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke']
+  # deploy container image to GKE
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args: ['run', '--filename=deployment.yml', '--location=us-central1', '--cluster= tryout-gke']
