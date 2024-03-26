@@ -29,11 +29,11 @@ steps:
 
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'BlazorGKETestApp/BlazorGKETestApp.Api/Dockerfile', '-t',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke.api',
+    args: ['build', '-f', 'BlazorGKETestApp.Api/Dockerfile', '-t',
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke-api',
            '.']
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke.api']
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke-api']
   
