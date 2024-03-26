@@ -28,7 +28,7 @@ spec:
         app: "blazorgke-api"
     spec:
       containers:
-      - name: "blazorgke-sha256-1"
+      - name: "blazorgke-api-sha256-1"
         image: "us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke-api"
         env:
         - name: "ApiKey"
