@@ -1,5 +1,6 @@
 using BlazorGKETestApp.Client.Pages;
 using BlazorGKETestApp.Components;
+using BlazorGKETestApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri(builder.Configuration["BackendUrl"]!)
+});
+
+builder.Services.AddScoped<IBackendService, BackendService>();
 
 var app = builder.Build();
 
