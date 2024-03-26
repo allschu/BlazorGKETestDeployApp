@@ -2,7 +2,7 @@
 apiVersion: "v1"
 kind: "ConfigMap"
 metadata:
-  name: "blazorgke-config-rnn1"
+  name: "blazorgke-config-cibr"
   namespace: "default"
   labels:
     app: "blazorgke"
@@ -18,7 +18,7 @@ metadata:
   labels:
     app: "blazorgke"
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: "blazorgke"
@@ -29,23 +29,23 @@ spec:
     spec:
       containers:
       - name: "blazorgke-sha256-1"
-        image: "us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke@sha256:380cb238e87d086de2a6efe91abe796fd256a9d49cbcaeb4b5dbaf4d11a5eeba"
+        image: "us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke"
         env:
         - name: "ApiKey"
           valueFrom:
             configMapKeyRef:
               key: "ApiKey"
-              name: "blazorgke-api-config-rnn1"
+              name: "blazorgke-config-cibr"
         - name: "BackendUrl"
           valueFrom:
             configMapKeyRef:
               key: "BackendUrl"
-              name: "blazorgke-api-config-rnn1"
+              name: "blazorgke-config-cibr"
 ---
 apiVersion: "autoscaling/v2"
 kind: "HorizontalPodAutoscaler"
 metadata:
-  name: "blazorgke-hpa-1gu9"
+  name: "blazorgke-hpa-aiew"
   namespace: "default"
   labels:
     app: "blazorgke"
@@ -63,26 +63,3 @@ spec:
       target:
         type: "Utilization"
         averageUtilization: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: blazorgke
-  name: blazorgke-service
-  namespace: default
-spec:
-  externalTrafficPolicy: Cluster
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
-  ports:
-  - nodePort: 30039
-    port: 80
-    protocol: TCP
-    targetPort: 8080
-  selector:
-    app: blazorgke
-  sessionAffinity: None
-  type: LoadBalancer
