@@ -16,7 +16,7 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'BlazorGKETestApp/WebApplication1/Dockerfile', '-t',
+    args: ['build', '-f', 'WebApplication1/Dockerfile', '-t',
            'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/webapp',
            '.']
   # Docker Push
