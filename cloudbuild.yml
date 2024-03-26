@@ -39,4 +39,4 @@ steps:
 
 # deploy container image to GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
-    args: ['run', '--filename=deployment-api.yml', '--location=us-central1', '--cluster=tryout-gke']
+    args: ['run', '--filename=deployment-api.yml', '--location=us-central1', '--cluster=tryout-gke','--output=./app-output']
