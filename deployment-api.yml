@@ -8,7 +8,7 @@ metadata:
     app: "blazorgke-api"
 data:
   ApiKey: "OIFJFJdfjdf874434x_x"
-  BackendUrl: "https://localhost:7284/"
+  CORS: "https://localhost:7275"
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -36,10 +36,10 @@ spec:
             configMapKeyRef:
               key: "ApiKey"
               name: "blazorgke-api-config-rnn1"
-        - name: "BackendUrl"
+        - name: "CORS"
           valueFrom:
             configMapKeyRef:
-              key: "BackendUrl"
+              key: "CORS"
               name: "blazorgke-api-config-rnn1"
 ---
 apiVersion: "autoscaling/v2"

@@ -1,4 +1,15 @@
 ---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "blazorgke-config-rnn1"
+  namespace: "default"
+  labels:
+    app: "blazorgke"
+data:
+  ApiKey: "OIFJFJdfjdf874434x_x"
+  BackendUrl: "https://localhost:7275"
+---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
@@ -19,6 +30,17 @@ spec:
       containers:
       - name: "blazorgke-sha256-1"
         image: "us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke@sha256:380cb238e87d086de2a6efe91abe796fd256a9d49cbcaeb4b5dbaf4d11a5eeba"
+        env:
+        - name: "ApiKey"
+          valueFrom:
+            configMapKeyRef:
+              key: "ApiKey"
+              name: "blazorgke-api-config-rnn1"
+        - name: "BackendUrl"
+          valueFrom:
+            configMapKeyRef:
+              key: "BackendUrl"
+              name: "blazorgke-api-config-rnn1"
 ---
 apiVersion: "autoscaling/v2"
 kind: "HorizontalPodAutoscaler"
