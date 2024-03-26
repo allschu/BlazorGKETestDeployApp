@@ -1,6 +1,8 @@
-﻿namespace BlazorGKETestApp.Client;
+﻿using BlazorGKETestApp.Client.Models;
+
+namespace BlazorGKETestApp.Client;
 
 public interface IApiBackend
 {
-     Task<string[]?> CallWeatherAsync(CancellationToken cancellationToken);
+     Task<WeatherForecast[]?> CallWeatherAsync(CancellationToken cancellationToken = default);
 }

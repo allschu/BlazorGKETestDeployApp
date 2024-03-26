@@ -1,19 +1,31 @@
 ﻿@page "/counter"
+@using BlazorGKETestApp.Client.Models
 
-
+@inject IApiBackend ApiBackend
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
 
-<p role="status">Current count: @currentCount</p>
+<p role="status">Current count: BackendUrl</p>
+
+@if (_weathers != null)
+{
+    @foreach (var item in _weathers)
+    {
+        <p>@item.Summary</p>
+    }
+}
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
     private int currentCount = 0;
+    private WeatherForecast[]? _weathers;
 
-    private void IncrementCount()
+    private async Task IncrementCount()
     {
         currentCount++;
+
+        _weathers = await ApiBackend.CallWeatherAsync();
     }
 }

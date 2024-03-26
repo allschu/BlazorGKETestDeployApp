@@ -1,8 +1,11 @@
-using BlazorGKETestApp.Client.Pages;
+using BlazorGKETestApp.Client;
+using BlazorGKETestApp.Client.Services;
 using BlazorGKETestApp.Components;
 using BlazorGKETestApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -15,6 +18,7 @@ builder.Services.AddScoped(sp => new HttpClient
 });
 
 builder.Services.AddScoped<IBackendService, BackendService>();
+builder.Services.AddScoped<IApiBackend, ApiBackendService>();
 
 var app = builder.Build();
 

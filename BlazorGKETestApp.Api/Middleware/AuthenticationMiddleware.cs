@@ -20,7 +20,7 @@ public class AuthenticationMiddleware
             return;
         }
         string? userApiKey = context.Request.Headers["X-API-KEY"];
-        if (_configuration["ApiKey"] == userApiKey)
+        if (_configuration["ApiKey"] != userApiKey)
         {
             context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
             return;
