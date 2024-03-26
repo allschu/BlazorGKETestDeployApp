@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A785DF46-0938-4791-9D8E-564B3698EA1E}"
 	ProjectSection(SolutionItems) = preProject
 		cloudbuild.yml = cloudbuild.yml
-		deliverypipelineconfig.yml = deliverypipelineconfig.yml
 		deployment.yml = deployment.yml
 		deployment-api.yml = deployment-api.yml
 	EndProjectSection
