@@ -16,27 +16,27 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'BlazorGKETestApp/BlazorGKETestApp/Dockerfile', '-t',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke',
+    args: ['build', '-f', 'BlazorGKETestApp/WebApplication1/Dockerfile', '-t',
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/webapp',
            '.']
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke']
+           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/webapp']
   # deploy container image to GKE
-  - name: "gcr.io/cloud-builders/gke-deploy"
-    args: ['run', '--filename=deployment.yml', '--location=us-central1', '--cluster=tryout-gke']
+  # - name: "gcr.io/cloud-builders/gke-deploy"
+  #   args: ['run', '--filename=deployment.yml', '--location=us-central1', '--cluster=tryout-gke']
 
   # Docker Build
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'BlazorGKETestApp.Api/Dockerfile', '-t',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke-api',
-           '.']
-  # Docker Push
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',
-           'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke-api'] 
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['build', '-f', 'BlazorGKETestApp.Api/Dockerfile', '-t',
+  #          'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke-api',
+  #          '.']
+  # # Docker Push
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['push',
+  #          'us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke-api'] 
 
-# deploy container image to GKE
-  - name: "gcr.io/cloud-builders/gke-deploy"
-    args: ['run', '--filename=deployment-api.yml', '--location=us-central1', '--cluster=tryout-gke','--output=./app-output']
+# # deploy container image to GKE
+#   - name: "gcr.io/cloud-builders/gke-deploy"
+#     args: ['run', '--filename=deployment-api.yml', '--location=us-central1', '--cluster=tryout-gke','--output=./app-output']

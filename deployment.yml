@@ -2,57 +2,57 @@
 apiVersion: "v1"
 kind: "ConfigMap"
 metadata:
-  name: "blazorgke-config"
+  name: "webapp-config"
   namespace: "default"
   labels:
-    app: "blazorgke"
+    app: "webapp"
 data:
   ApiKey: "OIFJFJdfjdf874434x_x"
-  BackendUrl: "https://localhost:7275"
+  BackendUrl: "http://localhost:7275"
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "blazorgke"
+  name: "webapp"
   namespace: "default"
   labels:
-    app: "blazorgke"
+    app: "webapp"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "blazorgke"
+      app: "webapp"
   template:
     metadata:
       labels:
-        app: "blazorgke"
+        app: "webapp"
     spec:
       containers:
-      - name: "blazorgke-sha256-1"
-        image: "us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke"
+      - name: "webapp-sha256-1"
+        image: "us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/webapp"
         env:
         - name: "ApiKey"
           valueFrom:
             configMapKeyRef:
               key: "ApiKey"
-              name: "blazorgke-config"
+              name: "webapp-config"
         - name: "BackendUrl"
           valueFrom:
             configMapKeyRef:
               key: "BackendUrl"
-              name: "blazorgke-config"
+              name: "webapp-config"
 ---
 apiVersion: "autoscaling/v2"
 kind: "HorizontalPodAutoscaler"
 metadata:
-  name: "blazorgke-hpa-aiew"
+  name: "webapp-hpa-aiew"
   namespace: "default"
   labels:
-    app: "blazorgke"
+    app: "webapp"
 spec:
   scaleTargetRef:
     kind: "Deployment"
-    name: "blazorgke"
+    name: "webapp"
     apiVersion: "apps/v1"
   minReplicas: 1
   maxReplicas: 5
