@@ -1,4 +1,6 @@
-﻿using WebApplication1.Models;
+﻿using System.Net;
+using Dapr.Client;
+using WebApplication1.Models;
 
 namespace WebApplication1.Service
 {
@@ -6,17 +8,17 @@ namespace WebApplication1.Service
     {
         public async Task<WeatherForecast[]> GetWeatherAsync(CancellationToken cancellationToken = default)
         {
+            //var client = DaprClient.CreateInvokeHttpClient(appId: "api");
             using var client = httpClientFactory.CreateClient("BackendClient");
             var response = await client.GetAsync("/weatherforecast", cancellationToken);
 
-            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<WeatherForecast[]>(cancellationToken: cancellationToken);
+                return result;
+            }
 
-            var result = await response.Content.ReadFromJsonAsync<WeatherForecast[]>(cancellationToken: cancellationToken);
-
-            if (result == null)
-                throw new InvalidOperationException("WeatherForecast failed");
-
-            return result;
+            throw new Exception($"Error {response.StatusCode}");
         }
     }
 }

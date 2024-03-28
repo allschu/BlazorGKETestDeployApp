@@ -7,12 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*
 builder.Services.AddCors(o => o.AddPolicy("Cors", f =>
 {
         f.WithOrigins(builder.Configuration["CORS"]!)
         .AllowAnyMethod()
         .AllowAnyHeader();
 }));
+*/
 
 
 var app = builder.Build();
@@ -24,9 +26,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("Cors");
-app.UseMiddleware<AuthenticationMiddleware>();
-app.UseHttpsRedirection();
+//app.UseCors("Cors");
+//app.UseMiddleware<AuthenticationMiddleware>();
+//app.UseHttpsRedirection();
 
 var summaries = new[]
 {

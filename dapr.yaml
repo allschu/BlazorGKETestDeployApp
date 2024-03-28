@@ -1,0 +1,9 @@
+version: 1
+apps:
+  - appDirPath: ./WebApplication1/
+    appID: webapplication
+    command: ["dotnet", "run"]
+  - appID: api
+    appPort: 5135 #watch out for the port that is used in launchsettings.json
+    appDirPath: ./BlazorGKETestApp.Api/
+    command: ["dotnet", "run"]
