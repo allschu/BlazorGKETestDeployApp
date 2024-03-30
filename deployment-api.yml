@@ -1,0 +1,65 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "blazorgke-api-config"
+  namespace: "default"
+  labels:
+    app: "blazorgke-api"
+data:
+  ApiKey: "OIFJFJdfjdf874434x_x"
+  CORS: "https://localhost:7275"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "blazorgke-api"
+  namespace: "default"
+  labels:
+    app: "blazorgke-api"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "blazorgke-api"
+  template:
+    metadata:
+      labels:
+        app: "blazorgke-api"
+    spec:
+      containers:
+      - name: "blazorgke-api-sha256-1"
+        image: "us-central1-docker.pkg.dev/firstgke-418008/gke-image-repository/blazorgke-api"
+        env:
+        - name: "ApiKey"
+          valueFrom:
+            configMapKeyRef:
+              key: "ApiKey"
+              name: "blazorgke-api-config"
+        - name: "CORS"
+          valueFrom:
+            configMapKeyRef:
+              key: "CORS"
+              name: "blazorgke-api-config"
+---
+apiVersion: "autoscaling/v2"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "blazorgke-api-hpa-fmdv"
+  namespace: "default"
+  labels:
+    app: "blazorgke-api"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "blazorgke-api"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      target:
+        type: "Utilization"
+        averageUtilization: 80

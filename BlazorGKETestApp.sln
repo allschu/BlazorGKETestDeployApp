@@ -10,9 +10,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A785DF46-0938-4791-9D8E-564B3698EA1E}"
 	ProjectSection(SolutionItems) = preProject
 		cloudbuild.yml = cloudbuild.yml
-		deliverypipelineconfig.yml = deliverypipelineconfig.yml
+		deployment-api.yml = deployment-api.yml
+		dapr.yaml = dapr.yaml
 		deployment.yml = deployment.yml
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorGKETestApp.Api", "BlazorGKETestApp.Api\BlazorGKETestApp.Api.csproj", "{31CF335A-5D8E-42A3-B69D-A4F8F612E449}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{BB10BC78-CD0E-41EC-80B7-B8DB227070DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +33,14 @@ Global
 		{151B51CC-962E-455B-BD9B-37CE9E5A672D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{151B51CC-962E-455B-BD9B-37CE9E5A672D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{151B51CC-962E-455B-BD9B-37CE9E5A672D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31CF335A-5D8E-42A3-B69D-A4F8F612E449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CF335A-5D8E-42A3-B69D-A4F8F612E449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CF335A-5D8E-42A3-B69D-A4F8F612E449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CF335A-5D8E-42A3-B69D-A4F8F612E449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB10BC78-CD0E-41EC-80B7-B8DB227070DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB10BC78-CD0E-41EC-80B7-B8DB227070DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB10BC78-CD0E-41EC-80B7-B8DB227070DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB10BC78-CD0E-41EC-80B7-B8DB227070DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
