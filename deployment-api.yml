@@ -26,6 +26,10 @@ spec:
     metadata:
       labels:
         app: "blazorgke-api"
+    annotations:
+       dapr.io/enabled: "true"
+       dapr.io/app-id: "api"
+       dapr.io/app-port: "8080"
     spec:
       containers:
       - name: "blazorgke-api-sha256-1"
