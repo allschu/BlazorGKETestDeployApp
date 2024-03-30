@@ -16,7 +16,6 @@ builder.Services.AddCors(o => o.AddPolicy("Cors", f =>
 }));
 */
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,7 +26,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseCors("Cors");
-//app.UseMiddleware<AuthenticationMiddleware>();
+app.UseMiddleware<AuthenticationMiddleware>();
 //app.UseHttpsRedirection();
 
 var summaries = new[]
@@ -37,7 +36,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
