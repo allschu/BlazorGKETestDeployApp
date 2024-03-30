@@ -3,12 +3,12 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Service
 {
-    public class BackendService() : IBackendService
+    public class BackendService(IConfiguration _configuration) : IBackendService
     {
         public async Task<WeatherForecast[]> GetWeatherAsync(CancellationToken cancellationToken = default)
         {
             var client = DaprClient.CreateInvokeHttpClient(appId: "api");
-
+            client.DefaultRequestHeaders.Add("X-API-KEY", _configuration["ApiKey"]);
             var response = await client.GetAsync("/weatherforecast", cancellationToken);
 
             if (response.IsSuccessStatusCode)
