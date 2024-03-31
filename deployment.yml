@@ -28,7 +28,7 @@ spec:
         app: "webapp"
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "api"
+        dapr.io/app-id: "webapp"
         dapr.io/app-port: "8080"
     spec:
       containers:
