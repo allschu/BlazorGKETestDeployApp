@@ -57,6 +57,8 @@ kind: Service
 metadata:
   namespace: default
   name: blazorgke-api
+  annotations:
+    istio.io/traffic-policy.mutual-tls: "true"  # Annotation to enable mTLS
   labels:
     app: blazorgke-api
     service: blazorgke-api
