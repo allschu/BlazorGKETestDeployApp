@@ -7,7 +7,9 @@ namespace WebApplication1.Service
     {
         public async Task<WeatherForecast[]> GetWeatherAsync(CancellationToken cancellationToken = default)
         {
-            var client = DaprClient.CreateInvokeHttpClient(appId: "api");
+            //var client = DaprClient.CreateInvokeHttpClient(appId: "api");
+            using var client = new HttpClient();
+            client.BaseAddress = new Uri(_configuration["ApiUrl"]);
             client.DefaultRequestHeaders.Add("X-API-KEY", _configuration["ApiKey"]);
             var response = await client.GetAsync("/weatherforecast", cancellationToken);
 

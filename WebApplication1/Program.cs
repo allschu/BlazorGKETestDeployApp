@@ -1,4 +1,3 @@
-using Dapr.Client;
 using WebApplication1.Service;
 
 var builder = WebApplication.CreateBuilder(args);

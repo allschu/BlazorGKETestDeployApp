@@ -1,0 +1,67 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: default
+  labels:
+    istio-injection: enabled
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: istio-system
+  name: ingressgateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: default
+  name: webapp
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - istio-system/ingressgateway
+  exportTo:
+    - istio-system
+  http:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host:  webapp
+            port:
+              number: 8080
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: default
+spec:
+  mtls:
+    mode: STRICT
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: api
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: webapp
+  mtls:
+    mode: DISABLE
+---

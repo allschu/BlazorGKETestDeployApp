@@ -1,3 +1,4 @@
+---
 apiVersion: "v1"
 kind: "ConfigMap"
 metadata:
@@ -7,7 +8,7 @@ metadata:
     app: "blazorgke-api"
 data:
   ApiKey: "OIFJFJdfjdf874434x_x"
-  CORS: "http://webapp.default.svc.cluster.local:8080"
+  CORS: "http://webapp.default.svc.cluster.local"
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -27,9 +28,8 @@ spec:
         app: "blazorgke-api"
     spec:
       containers:
-      - name: "blazor-api-sha256-1"
-        image: "gcr.io/testblazorapp-417308/blazor-api"
-        imagePullPolicy: Always
+      - name: "blazorgke-api-sha256-1"
+        image: "gcr.io/testblazorapp-417308/blazor-api:latest"
         ports:
             - containerPort: 8080
         env:
@@ -44,25 +44,4 @@ spec:
               key: "CORS"
               name: "blazorgke-api-config"
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  namespace: default
-  name: default-blazorgke-api
-  labels:
-    account: blazorgke-api
----
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: default
-  name: blazorgke-api
-  labels:
-    app: blazorgke-api
-    service: blazorgke-api
-spec:
-  ports:
-  - port: 8080
-    name: http
-  selector:
-    app: blazorgke-api
+

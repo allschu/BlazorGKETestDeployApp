@@ -26,7 +26,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseCors("Cors");
-app.UseMiddleware<AuthenticationMiddleware>();
+//app.UseMiddleware<AuthenticationMiddleware>();
 //app.UseHttpsRedirection();
 
 var summaries = new[]
